@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { View } from '@tarojs/components'
 
-import InfoCard from './InfoCard'
-import NoticeCard from './NoticeCard'
+import InfoCard, { IProps as InfoIProps } from './InfoCard'
+import NoticeCard, { IProps as NoticeIProps } from './NoticeCard'
 import s from './index.scss'
 
 interface IProps {
@@ -11,7 +11,12 @@ interface IProps {
   className?: string
 }
 
-const Card: FC<IProps> = ({
+interface FCLocal<T> extends FC<T> {
+  InfoCard: FC<InfoIProps>
+  NoticeCard: FC<NoticeIProps>
+}
+
+const Card: FCLocal<IProps> = ({
   title,
   extraInfo,
   className,
