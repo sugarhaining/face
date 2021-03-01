@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 
 import s from './InfoCard.scss'
 
-interface IProps {
+export interface IProps {
   title: string
   value: string
 }

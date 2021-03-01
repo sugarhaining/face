@@ -4,7 +4,7 @@ import { Notice } from '@/types'
 
 import s from './NoticeCard.scss'
 
-interface IProps {
+export interface IProps {
   notice: Notice
   clickFn?: () => void
   className: string
