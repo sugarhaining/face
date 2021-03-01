@@ -12,7 +12,7 @@ export const systemInfoAtom = atom<ISystemInfo>({
   key: 'global:systemInfo',
   default: {
     ...systemInfo,
-    isIphoneX: systemInfo.safeArea.top > 20 ? true : false,
+    isIphoneX: systemInfo.safeArea.top === 44 ? true : false,
     safeBottomDistance: 68,
   },
 });
