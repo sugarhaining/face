@@ -1,0 +1,36 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    padding: 20px 20px 40px;
+    box-sizing: border-box;
+    @include flex-column;
+    font-size: 24rpx;
+    position: relative;
+}
+
+.title {
+    font-size: 50rpx;
+    text-align: center;
+}
+
+.slogen {
+    text-align: center;
+}
+
+.content {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate3d(-50%, -40%, 0);
+}
+
+.logo {
+    margin-top: 50px;
+}
+
+.button {
+    width: calc(100vw - 40px);
+    position: fixed;
+    bottom: 40px;
+    left: 20px;
+}

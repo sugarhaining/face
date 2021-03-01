@@ -1,0 +1,17 @@
+.form {
+  margin: 20px;
+  @include flex-column;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+.submit {
+  position: fixed;
+  bottom: 40px;
+  left: 10px;
+  width: calc(100vw - 20px);
+  background-color: $theme_color !important;
+  border: none;
+  @include base-shadow;
+  color: white;
+}

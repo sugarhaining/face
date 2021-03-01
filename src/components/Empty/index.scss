@@ -1,0 +1,8 @@
+.container {
+  @include flex-column;
+}
+
+.tip {
+  font-size: 24px;
+  color: #bbb;
+}

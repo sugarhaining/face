@@ -1,0 +1,8 @@
+.container {
+  min-height: calc(100vh - 60px);
+  background-color: $bg_color;
+  padding-bottom: 130px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

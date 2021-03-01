@@ -1,0 +1,39 @@
+.container {
+  @include flex-column;
+  align-items: stretch;
+}
+
+.title {
+  @include page-panel($url: '../../asserts/images/workbench-panel.png');
+}
+
+.slogen {
+  height: 180px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 56px;
+  color: white;
+  font-weight: 200;
+}
+
+.cards {
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin-top: -40px;
+  z-index: 1;
+}
+
+.menuList {
+  width: 100%;
+  @include flex-row;
+  flex-wrap: wrap;
+}
+
+.menuItem {
+  width: calc(100% / 3);
+  @include flex-row;
+  justify-content: center;
+  margin-bottom: 20px;
+}

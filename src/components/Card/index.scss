@@ -1,0 +1,41 @@
+.container {
+  @include base-shadow;
+  @include flex-column;
+  padding: 40px;
+  align-items: stretch;
+}
+
+.topPanel {
+  @include flex-row;
+  justify-content: space-between;
+}
+
+.block {
+  @include flex-row;
+  width: 40%;
+}
+
+.line {
+  width: 5px;
+  height: 30px;
+  background-color: $theme_color;
+  border-radius: 1px;
+}
+
+.title {
+  margin-left: 20px;
+  flex: 1;
+  @include hide-text-with-ellipsis;
+}
+
+.extra {
+  text-align: right;
+  flex: 1;
+  font-size: 24px;
+  color: $tab_blur_color;
+}
+
+.custom {
+  padding-top: 40px;
+  box-sizing: border-box;
+}

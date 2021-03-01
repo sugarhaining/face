@@ -1,0 +1,34 @@
+.container {
+  @include flex-column;
+  align-items: stretch;
+}
+
+.form {
+  margin-top: 40px;
+  padding: 0 20px 10px;
+  box-sizing: border-box;
+  @include flex-column;
+  align-items: stretch;
+
+  :global {
+    .at-textarea {
+      border-radius: 0;
+    }
+  }
+}
+
+.imagePicker {
+  margin-top: 40px;
+}
+
+.button {
+  width: calc(100vw - 20px);
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  z-index: 999;
+  border: 'none';
+  background-color: $theme_color !important;
+  @include base-shadow;
+}

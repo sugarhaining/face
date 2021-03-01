@@ -1,11 +1,17 @@
 export default {
   pages: [
-    'pages/index/index'
+    'pages/App/index',
+    'pages/Config/index',
+    'pages/Board/index',
+    'pages/Record/index',
+    'pages/BroadCast/index',
+    'pages/Notice/index',
+    'pages/Login/index',
   ],
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
-  }
-}
+    navigationBarBackgroundColor: '#2070ff',
+    navigationBarTitleText: 'face',
+    navigationBarTextStyle: 'white',
+  },
+};

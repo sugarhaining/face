@@ -1,0 +1,17 @@
+.container {
+  padding: 0 20px;
+  @include flex-column;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  @include flex-row;
+}
+
+.name {
+  margin-top: 10px;
+  font-size: 26px;
+  text-align: center;
+}

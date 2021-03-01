@@ -1,0 +1,42 @@
+@mixin page-panel($url) {
+  width: 100vw;
+  height: 350px;
+  background-color: $theme_color;
+  border-radius: 0 0 50px 50px;
+  padding: 30px;
+  box-sizing: border-box;
+  position: relative;
+  background-image: url($url);
+  background-position: top right;
+  background-size: 350px 350px;
+  background-repeat: no-repeat;
+}
+
+@mixin divider($height: 20px, $borderColor: white, $spacing: 20px) {
+  width: 0;
+  height: $height;
+  border: 1px solid $borderColor;
+  margin: 0 $spacing;
+}
+
+@mixin hide-text-with-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin base-shadow {
+  background-color: white;
+  box-shadow: 0 0 6px $bg_color;
+  border-radius: 20px;
+}
+
+@mixin flex-row {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-column {
+  @include flex-row;
+  flex-direction: column;
+}

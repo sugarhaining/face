@@ -1,0 +1,35 @@
+.container {
+    height: 100vh;
+    overflow-y: scroll;
+    background-color: $bg_color;
+}
+
+.noticeList {
+    width: 100vw;
+    padding: 20px 20px 40px;
+    box-sizing: border-box;
+}
+
+.notice {
+    margin-top: 40px;
+}
+
+.noticeDetail {
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.noticeContent {
+    padding: 20px 30px 20px;
+    box-sizing: border-box;
+}
+
+.noticeImage {
+    align-self: center;
+    margin-top: 20px;
+    flex-shrink: 0;
+}

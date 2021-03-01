@@ -1,0 +1,14 @@
+$theme_color: #2070ff;
+$bg_color: #f5f6f7;
+
+$tab_focus_color: $theme_color;
+$tab_blur_color: #cdcdcd;
+
+$theme_font_size: 14px;
+
+:export {
+  themeColor: $theme_color;
+  bgColor: $bg_color;
+  tabFocusColor: $tab_focus_color;
+  tabBlurColor: $tab_blur_color;
+}
