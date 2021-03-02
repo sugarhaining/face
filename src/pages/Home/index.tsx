@@ -64,7 +64,7 @@ const Home: FC<IProps> = () => {
                   })
                 }}
               >
-                点击去登陆&nbsp;&gt;
+                点击去注册&nbsp;&gt;
               </View>
             )
           }

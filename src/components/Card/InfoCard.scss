@@ -1,17 +1,21 @@
 .container {
-  padding: 20px 20px;
-  box-sizing: border-box;
-  @include flex-row;
-  justify-content: space-between;
-  font-size: 26px;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    @include flex-row;
+    justify-content: space-between;
+    font-size: 26px;
 }
 
 .title {
-  max-width: 200px;
-  @include hide-text-with-ellipsis;
+    max-width: 200px;
+    @include hide-text-with-ellipsis;
 }
 
 .value {
-  max-width: 300px;
-  @include hide-text-with-ellipsis;
+    max-width: 300px;
+    @include hide-text-with-ellipsis;
+}
+
+.placeholder {
+    color: $tab_blur_color;
 }

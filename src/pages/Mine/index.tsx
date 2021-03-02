@@ -5,6 +5,7 @@ import { AtAvatar, AtButton } from 'taro-ui'
 
 import { useUserInfo, useOnePiece, useLoginInfo } from '@/hooks'
 import { LoginInfo } from '@/types'
+import { encodePhoneNumber } from '@/utils'
 import { Card, SafeBottomDistance } from '@/components'
 import s from './index.scss'
 
@@ -29,7 +30,7 @@ const Mine: FC<IProps> = () => {
       handleNavigate('/pages/Config/index')
     } else {
       showModal({
-        title: '请前往登陆',
+        title: '请前往注册',
         success(res) {
           if (res.confirm) {
             handleNavigate('/pages/Login/index')
@@ -88,13 +89,13 @@ const Mine: FC<IProps> = () => {
           {userInfo && <InfoCard title='昵称' value={userInfo.nickName} />}
         </Card>
         <Card title='个人数据' className={s.info}>
-          <InfoCard title='姓名' value='苏国涛' />
-          <InfoCard title='性别' value='男' />
-          <InfoCard title='手机号' value='187****5240' />
+          <InfoCard title='姓名' value={loginInfo?.name} />
+          <InfoCard title='性别' value={loginInfo?.sex} />
+          <InfoCard title='手机号' value={encodePhoneNumber(loginInfo?.phone)} />
         </Card>
         <Card title='部门信息' className={s.info}>
-          <InfoCard title='职位' value='前端工程师' />
-          <InfoCard title='个人签名' value='今天也要加油呢' />
+          <InfoCard title='职位' value={loginInfo?.job} />
+          <InfoCard title='个人签名' value={loginInfo?.sign} />
         </Card>
       </View>
       <AtButton className={s.setButton} onClick={() => handleChangeUserInfo(loginInfo)}>

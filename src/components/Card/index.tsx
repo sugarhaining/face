@@ -9,6 +9,9 @@ interface IProps {
   title: string
   extraInfo?: string
   className?: string
+  style?: {
+    [key: string]: string
+  }
 }
 
 interface FCLocal<T> extends FC<T> {
@@ -20,10 +23,11 @@ const Card: FCLocal<IProps> = ({
   title,
   extraInfo,
   className,
+  style,
   children
 }) => {
   return (
-    <View className={`${s.container} ${className}`}>
+    <View className={`${s.container} ${className}`} style={style}>
       <View className={s.topPanel}>
         <View className={s.block}>
           <View className={s.line} />

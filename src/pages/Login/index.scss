@@ -28,6 +28,14 @@
     margin-top: 50px;
 }
 
+.input {
+    position: fixed;
+    left: 40px;
+    right: 40px;
+    bottom: 160px;
+    margin: 0;
+}
+
 .button {
     width: calc(100vw - 40px);
     position: fixed;
