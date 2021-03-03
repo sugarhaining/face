@@ -2,6 +2,8 @@ import React, { FC, useCallback } from 'react'
 import { showToast, navigateTo } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 
+import { useLoginInfo } from '@/hooks'
+
 import s from './index.scss'
 
 interface IProps {
@@ -19,20 +21,27 @@ const Menu: FC<IProps> = ({
   useRoute,
   path
 }) => {
-
+  const loginInfo = useLoginInfo()
   const handleChangeRouter = useCallback((routerPath?: string) => {
+    if (!loginInfo) {
+      showToast({
+        title: '请先注册',
+        icon: 'none',
+      })
+      return;
+    }
+
     if (!routerPath) {
       showToast({
         title: '新功能开发中',
         icon: 'none',
-        duration: 1000
       })
       return;
     }
     navigateTo({
       url: routerPath
     })
-  }, [])
+  }, [loginInfo])
 
   const handleClick = useCallback((menuName: string) => {
     if (clickFn) {
