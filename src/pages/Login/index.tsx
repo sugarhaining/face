@@ -1,10 +1,10 @@
 import React, { FC, useCallback, useState } from 'react'
-import { showToast } from '@tarojs/taro'
+import { navigateTo, setStorageSync, showToast } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtButton, AtInput } from 'taro-ui'
 
 import LoginIcon from '@/asserts/images/login.png'
-
+import { fetchRegister } from './service'
 import s from './index.scss'
 
 interface IProps { }
@@ -12,11 +12,28 @@ interface IProps { }
 
 const Notice: FC<IProps> = () => {
   const [code, setCode] = useState<string>('')
-  const handleRegister = useCallback((registerCode) => {
+  const handleRegister = useCallback(async (registerCode) => {
     if (!registerCode) {
       showToast({
         title: '邀请码不能为空',
         icon: 'none'
+      })
+    } else {
+      const [err, res] = await fetchRegister({ code: registerCode })
+      if (err) {
+        showToast({
+          title: '邀请码无效',
+          icon: 'none'
+        })
+        return;
+      }
+
+      // setStorageSync('LOGININGO', {
+      //   memberId: member_id
+      // })
+
+      navigateTo({
+        url: `/pages/Config/index?memberId=${res?.data?.member_id}`
       })
     }
   }, [])

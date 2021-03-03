@@ -1,9 +1,10 @@
 import React, { FC, useCallback, useReducer, useState } from 'react'
-import { showToast } from '@tarojs/taro'
+import { setStorageSync, showToast, useRouter } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtInput, AtForm, AtButton, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 
 import { SubPageTitle } from '@/components'
+import { fetchMemberInfo } from './service'
 import { initialFormState, reducer } from './constants'
 import s from './index.scss'
 
@@ -12,16 +13,20 @@ interface IProps { }
 const Config: FC<IProps> = () => {
   const [formState, dispatch] = useReducer(reducer, initialFormState)
   const [showActionSheet, setShowActionSheet] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { params: { memberId = '' } } = useRouter()
 
   const handleFieldChange = useCallback((field: string, value: string | number) => {
     dispatch({ type: field, payload: { [`${field}`]: value } })
   }, [])
 
-  const handleFormValidate = useCallback((currFormState: any) => {
+  const handleFormValidate = useCallback(async (currFormState: any) => {
     const {
       name,
       sex,
       phone,
+      job = '',
+      sign = ''
     } = currFormState
     const phoneReg = /^1(3\d|4[5-8]|5[0-35-9]|6[567]|7[01345-8]|8\d|9[025-9])\d{8}$/
 
@@ -46,7 +51,30 @@ const Config: FC<IProps> = () => {
       })
       return;
     }
-  }, [])
+
+    setIsLoading(true)
+    const [err, res] = await fetchMemberInfo({
+      id: memberId,
+      name,
+      sex,
+      phone,
+      job,
+      sign
+    })
+    setIsLoading(false)
+    if (err || !res?.data?.member_info) {
+      showToast({
+        title: '修改失败',
+        icon: 'none'
+      })
+      return;
+    }
+
+    setStorageSync('LOGININFO', res?.data?.member_info)
+    showToast({
+      title: '修改成功'
+    })
+  }, [memberId])
 
   return (
     <View className={s.container}>
@@ -130,7 +158,7 @@ const Config: FC<IProps> = () => {
           value={formState.sign}
           onChange={value => handleFieldChange('sign', value)}
         />
-        <AtButton className={s.submit} onClick={() => handleFormValidate(formState)}>提交</AtButton>
+        <AtButton disabled={isLoading} className={s.submit} onClick={() => handleFormValidate(formState)}>提交</AtButton>
       </AtForm>
     </View>
   )

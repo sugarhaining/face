@@ -22,3 +22,7 @@ export interface LoginInfo {
   job?: string;
   sign?: string;
 }
+
+export interface BaseResult<T> {
+  data: T;
+}

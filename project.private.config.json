@@ -21,6 +21,12 @@
         {
           "name": "pages/Login/index",
           "pathName": "pages/Login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Config/index",
+          "pathName": "pages/Config/index",
           "scene": null
         }
       ]
