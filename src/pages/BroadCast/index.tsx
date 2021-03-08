@@ -1,10 +1,11 @@
 import React, { FC, useCallback, useReducer } from 'react'
-import { showToast } from '@tarojs/taro'
+import { getStorageSync, showToast } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtForm, AtInput, AtTextarea, AtImagePicker, AtButton } from 'taro-ui'
 
 import { SubPageTitle, SafeBottomDistance } from '@/components'
 import { initialFormState, reducer } from './constants'
+import { fetchNotice } from './service'
 import s from './index.scss'
 
 interface IProps { }
@@ -18,7 +19,11 @@ const BroadCast: FC<IProps> = () => {
   }, [])
 
   const handleFormSubmit = useCallback((values: any) => {
-    /* fetch */
+    const images = values.images.map((v: { url: string }) => v.url)
+    values.images = [...images]
+    const loginInfo = getStorageSync('LOGININFO')
+
+    fetchNotice({ ...values, name: loginInfo.name })
   }, [])
 
   const handleFormValidate = useCallback((values: any) => {

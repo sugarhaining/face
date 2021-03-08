@@ -1,5 +1,5 @@
 import React, { FC, memo, useCallback, useState } from 'react'
-import { navigateTo, getUserInfo, showToast, setStorageSync, showModal } from '@tarojs/taro'
+import { navigateTo, getUserInfo, showToast, setStorageSync, showModal, useDidShow } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtAvatar, AtButton } from 'taro-ui'
 
@@ -43,7 +43,7 @@ const Mine: FC<IProps> = () => {
   const handleGetUserInfo = useCallback(() => {
     getUserInfo().then(res => {
       setStorageSync('USERINFO', res.userInfo)
-      setRefresh(true)
+      setRefresh(prev => !prev)
     }).catch(() => {
       showToast({
         title: '请确认授权',
@@ -51,6 +51,10 @@ const Mine: FC<IProps> = () => {
       })
     })
   }, [])
+
+  useDidShow(() => {
+    setRefresh(prev => !prev)
+  })
 
   return (
     <View className={s.container}>

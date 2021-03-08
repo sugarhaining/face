@@ -1,5 +1,5 @@
-import React, { FC, memo } from 'react'
-import { navigateTo } from '@tarojs/taro'
+import React, { FC, memo, useState } from 'react'
+import { navigateTo, useDidShow } from '@tarojs/taro'
 import { Image, View } from '@tarojs/components'
 import { AtAvatar, AtCalendar } from 'taro-ui'
 import { useToggle } from 'ahooks'
@@ -31,8 +31,13 @@ const { tabBlurColor } = cssVariable
 
 const Home: FC<IProps> = () => {
   const [showCalendarMask, { toggle: toggleShowCalendarMask }] = useToggle<boolean>(false)
+  const [, setRefresh] = useState<boolean>(false)
   const userInfo = useUserInfo()
   const loginInfo = useLoginInfo()
+
+  useDidShow(() => {
+    setRefresh(prev => !prev)
+  })
 
   return (
     <View className={s.container}>

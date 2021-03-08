@@ -1,9 +1,10 @@
 import React, { FC, useCallback, useReducer, useState } from 'react'
-import { setStorageSync, showToast, useRouter } from '@tarojs/taro'
+import { navigateBack, setStorageSync, showToast, useRouter } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtInput, AtForm, AtButton, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 
 import { SubPageTitle } from '@/components'
+import { useLoginInfo } from '@/hooks'
 import { fetchMemberInfo } from './service'
 import { initialFormState, reducer } from './constants'
 import s from './index.scss'
@@ -11,10 +12,11 @@ import s from './index.scss'
 interface IProps { }
 
 const Config: FC<IProps> = () => {
-  const [formState, dispatch] = useReducer(reducer, initialFormState)
+  const loginInfo = useLoginInfo()
+  const [formState, dispatch] = useReducer(reducer, loginInfo || initialFormState)
   const [showActionSheet, setShowActionSheet] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { params: { memberId = '' } } = useRouter()
+  const { params: { memberId } } = useRouter()
 
   const handleFieldChange = useCallback((field: string, value: string | number) => {
     dispatch({ type: field, payload: { [`${field}`]: value } })
@@ -52,9 +54,17 @@ const Config: FC<IProps> = () => {
       return;
     }
 
+    if (sign.trim().length > 30) {
+      showToast({
+        title: '签名不能超过30字',
+        icon: 'none'
+      })
+      return;
+    }
+
     setIsLoading(true)
     const [err, res] = await fetchMemberInfo({
-      id: memberId,
+      id: memberId || loginInfo?.id || '',
       name,
       sex,
       phone,
@@ -72,9 +82,18 @@ const Config: FC<IProps> = () => {
 
     setStorageSync('LOGININFO', res?.data?.member_info)
     showToast({
-      title: '修改成功'
+      title: '修改成功',
+      duration: 1000
     })
-  }, [memberId])
+    let timer = setTimeout(() => {
+      navigateBack({
+        delta: 2,
+        success() {
+          clearTimeout(timer)
+        }
+      })
+    }, 1000)
+  }, [memberId, loginInfo])
 
   return (
     <View className={s.container}>
@@ -96,7 +115,6 @@ const Config: FC<IProps> = () => {
           value={formState.sex}
           editable={false}
           onClick={() => {
-            console.log('focus')
             setShowActionSheet(true)
           }}
           onChange={() => { }}

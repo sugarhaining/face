@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react'
-import { navigateTo, setStorageSync, showToast } from '@tarojs/taro'
+import { navigateTo, showToast } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtButton, AtInput } from 'taro-ui'
 
@@ -20,17 +20,13 @@ const Notice: FC<IProps> = () => {
       })
     } else {
       const [err, res] = await fetchRegister({ code: registerCode })
-      if (err) {
+      if (err || !res?.data?.member_id) {
         showToast({
           title: '邀请码无效',
           icon: 'none'
         })
         return;
       }
-
-      // setStorageSync('LOGININGO', {
-      //   memberId: member_id
-      // })
 
       navigateTo({
         url: `/pages/Config/index?memberId=${res?.data?.member_id}`

@@ -1,4 +1,4 @@
-import { request } from '@tarojs/taro';
+import { request, showToast } from '@tarojs/taro';
 import { UrlPrefix } from '@/apis/common';
 
 type RequestMethod = 'GET' | 'POST' | 'PUT';
@@ -19,6 +19,10 @@ export const fetch = async <T, U>(
       },
     }).then(res => res.data);
   } catch (err) {
+    showToast({
+      title: '未知错误，请稍后重试',
+      icon: 'none',
+    });
     error = err;
   }
 
