@@ -1,36 +1,29 @@
-import React, { FC } from 'react'
-import { View } from '@tarojs/components'
-import { Notice } from '@/types'
+import React, { FC } from 'react';
+import { View } from '@tarojs/components';
+import { Notice } from '@/types';
+import { timeStamp2FormatTime } from '@/utils';
 
-import s from './NoticeCard.scss'
+import s from './NoticeCard.scss';
 
 export interface IProps {
-  notice: Notice
-  clickFn?: () => void
-  className: string
+  notice: Notice;
+  clickFn?: () => void;
+  className: string;
 }
 
-const InfoCard: FC<IProps> = ({
-  notice,
-  className,
-  clickFn
-}) => {
-  const {
-    name,
-    time,
-    title,
-    summary,
-    content,
-  } = notice;
+const InfoCard: FC<IProps> = ({ notice, className, clickFn }) => {
+  const { name, time, title, summary, content } = notice;
 
   return (
     <View className={`${s.container} ${className}`} onClick={clickFn}>
       <View className={s.title}>{title}</View>
-      <View className={s.extra}>{name} | {time}</View>
+      <View className={s.extra}>
+        {name} | {timeStamp2FormatTime(time)}
+      </View>
       <View className={s.content}>{summary || content}</View>
       <View className={s.router}>点击查看全部</View>
     </View>
-  )
-}
+  );
+};
 
-export default InfoCard
+export default InfoCard;

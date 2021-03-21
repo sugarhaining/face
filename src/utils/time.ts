@@ -15,3 +15,11 @@ export const geneWelcomeMessage = () => {
     return '早上好';
   }
 };
+
+export const geneTimeStamp = () => {
+  return `${dayjs().unix()}`;
+};
+
+export const timeStamp2FormatTime = (timetamp: string = '') => {
+  return dayjs.unix(+timetamp).format('YYYY-MM-DD');
+};

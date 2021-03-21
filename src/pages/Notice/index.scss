@@ -2,6 +2,11 @@
     height: 100vh;
     overflow-y: scroll;
     background-color: $bg_color;
+
+    :global(.at-float-layout__container) {
+      min-height: calc(70vh);
+      max-height: calc(80vh);
+    }
 }
 
 .noticeList {
